@@ -3,22 +3,27 @@ package com.inatlas.challenge;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.inatlas.challenge.receipt.CalculateReceipt;
+import com.inatlas.challenge.receipt.Receipt;
+
 public class CoffeeShop {
 	
     private List<Product> orders = new ArrayList<>();
 
     private ProductsRepo productsRepo;    
+    private CalculateReceipt calculateReceipt;
     
-    public CoffeeShop(ProductsRepo productsRepo) {
+    public CoffeeShop(ProductsRepo productsRepo, CalculateReceipt calculateReceipt) {
     	this.productsRepo = productsRepo;
+    	this.calculateReceipt = calculateReceipt;
     }
     
     public void takeOrder(String product, Integer qtt) {
         this.orders.add(new Product(product, qtt, productsRepo.getPriceByProduct(product)));
     }
 
-    public void printReceipt() {    	    
-    	getCheapestReceipt().printReceipt();
+    public void printReceipt() {  
+    	calculateReceipt().printReceipt();
     }
 
     public void printMenu() {
@@ -30,28 +35,10 @@ public class CoffeeShop {
     	});
     }
     
-    private Receipt getCheapestReceipt() {
-    	GenerateReceipt generateReceiptWithPromotionFreeEspresso = new GenerateReceiptWithPromotionFreeEspresso(cloneProductsList(orders));
-    	GenerateReceipt generateReceiptWithDiscountFivePercent = new GenerateReceiptWithDiscountXPercent(cloneProductsList(orders), 0.05, 8);
-    	
-    	generateReceiptWithPromotionFreeEspresso.generateReceipt();
-    	generateReceiptWithDiscountFivePercent.generateReceipt();
-    
-    	if (generateReceiptWithPromotionFreeEspresso.getReceipt().getTotalPrice() > generateReceiptWithDiscountFivePercent.getReceipt().getTotalPrice()) 
-    		return generateReceiptWithDiscountFivePercent.getReceipt();
-    	else 
-    		return generateReceiptWithPromotionFreeEspresso.getReceipt();
+    private Receipt calculateReceipt()
+    {
+    	calculateReceipt.setOrders(orders);
+    	return calculateReceipt.calculate();
     }
-    
-    public List<Product> cloneProductsList(List<Product> list) {
-        List<Product> clone = new ArrayList<Product>(list.size());
-        for (Product item : list)
-			try {
-				clone.add((Product) item.clone());
-			} catch (CloneNotSupportedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        return clone;
-    }
+   
 }

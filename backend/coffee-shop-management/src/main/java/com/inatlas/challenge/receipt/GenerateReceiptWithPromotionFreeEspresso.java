@@ -1,13 +1,15 @@
-package com.inatlas.challenge;
+package com.inatlas.challenge.receipt;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.inatlas.challenge.Product;
+
 public class GenerateReceiptWithPromotionFreeEspresso implements GenerateReceipt {
 
 	private final int DISCOUNT_WHEN_BUY_X_LATTES= 2;
-	private List<Product> orders;
-	private Receipt receipt;
+	protected List<Product> orders;
+	protected Receipt receipt;
 	
 	public GenerateReceiptWithPromotionFreeEspresso(List<Product> orders) {
 		this.orders = orders;
@@ -15,30 +17,17 @@ public class GenerateReceiptWithPromotionFreeEspresso implements GenerateReceipt
 	}
 	
 	@Override
-	public void generateReceipt() {		   
+	public Receipt generateReceipt() {		   
 		updateIfThereAreDiscountToApply(); 
 				   
 		orders.forEach(p -> {			
 			receipt.addProduct(p.getName(), Double.valueOf(p.getPrice().split("\\$")[1]), p.getQtt());
 		});
-	}
-	
-	@Override
-	public Receipt getReceipt() { 
+		
 		return receipt;
 	}
-
-	private int calculateTotalFreeExpressos() {        
-        int totalLates = (int) this.orders.stream().filter(p -> p.getName().equals("Latte")).map(p -> {        	
-        	return p.getQtt();
-        }).reduce(0, (a,b) -> a + b);
-                
-        if (totalLates > 1) return totalLates / DISCOUNT_WHEN_BUY_X_LATTES;
-        
-        return 0;
-	}
 	
-	private void updateIfThereAreDiscountToApply() {
+	protected void updateIfThereAreDiscountToApply() {
 		
 		int totalFreeExpresso = calculateTotalFreeExpressos();
 		
@@ -50,6 +39,16 @@ public class GenerateReceiptWithPromotionFreeEspresso implements GenerateReceipt
             p.setDiscount(true);
             totalFreeExpresso--;          		
 		}
+	}
+	
+	private int calculateTotalFreeExpressos() {        
+        int totalLates = (int) this.orders.stream().filter(p -> p.getName().equals("Latte")).map(p -> {        	
+        	return p.getQtt();
+        }).reduce(0, (a,b) -> a + b);
+                
+        if (totalLates > 1) return totalLates / DISCOUNT_WHEN_BUY_X_LATTES;
+        
+        return 0;
 	}
 	
 	private List<Product> getOnlyEspressoProducts() {

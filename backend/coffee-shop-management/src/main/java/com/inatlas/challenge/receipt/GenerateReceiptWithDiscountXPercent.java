@@ -1,11 +1,13 @@
-package com.inatlas.challenge;
+package com.inatlas.challenge.receipt;
 
 import java.util.List;
 
+import com.inatlas.challenge.Product;
+
 public class GenerateReceiptWithDiscountXPercent implements GenerateReceipt {
 
-	private List<Product> orders;
-	private Receipt receipt;	
+	protected List<Product> orders;
+	protected Receipt receipt;	
 	
 	public GenerateReceiptWithDiscountXPercent(List<Product> orders, Double discountValue, Integer productsRequiredToApplyDiscount) {		
 		this.orders = orders;
@@ -13,16 +15,11 @@ public class GenerateReceiptWithDiscountXPercent implements GenerateReceipt {
 	}
 
 	@Override
-	public void generateReceipt() {		   						  
+	public Receipt generateReceipt() {		   						  
 		orders.forEach(p -> {			
 			receipt.addProduct(p.getName(), Double.valueOf(p.getPrice().split("\\$")[1]), p.getQtt());
 		});
-	}
-	
-	@Override
-	public Receipt getReceipt() { 
+		
 		return receipt;
 	}
-
-
 }

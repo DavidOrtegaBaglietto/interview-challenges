@@ -1,4 +1,4 @@
-package com.inatlas.challenge;
+package com.inatlas.challenge.receipt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class Receipt {
 	
 	public Double getTotalPrice() {				
 		if (discountToApplyToTotalPrice > 0 				
-				&& productsRequiredToApplyDiscount <= totalProducts) 
+				&& productsRequiredToApplyDiscount < totalProducts) 
 			return totalPrice - (totalPrice * discountToApplyToTotalPrice);
 		else
 			return totalPrice;

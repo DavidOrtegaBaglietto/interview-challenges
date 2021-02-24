@@ -38,7 +38,7 @@ public class Product implements Cloneable{
     }
 
 	@Override
-	protected Object clone() throws CloneNotSupportedException  {
+	public Object clone() throws CloneNotSupportedException  {
 		Product clone = null; 
         clone = (Product) super.clone();       
         return clone;
