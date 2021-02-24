@@ -6,12 +6,15 @@ import java.util.Map;
 public class ProductsRepoImpl implements ProductsRepo{
 	
 	@SuppressWarnings("serial")
-	private final Map<String, String> products = new HashMap<String, String> ()
-			{{
-				put("Sandwich", "$ 10.10");
-				put("Latte", "$ 5.3");
-				put("Espresso", "$ 4");			
-				}};
+	private final Map<String, String> products = new HashMap<String, String> () {{
+		put("Sandwich", "$ 10.10");
+		put("Latte", "$ 5.3");
+		put("Espresso", "$ 4");	
+		put("Capuccino", "$ 8");
+		put("Tea", "$ 6.1");
+		put("Cake Slice", "$ 9");
+		put("Milk", "$ 1");	
+	}};
 
 	@Override
 	public Map<String, String> getProducts() { 
