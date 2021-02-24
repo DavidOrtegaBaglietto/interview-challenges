@@ -2,14 +2,20 @@ package com.inatlas.challenge;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class CoffeeShop {
 	private final int DISCOUNT_WHEN_BUY_X_LATTES= 2;
     private List<Product> orders = new ArrayList<>();
 
+    private ProductsRepo productsRepo;
+    
+    public CoffeeShop(ProductsRepo productsRepo)
+    {
+    	this.productsRepo = productsRepo;
+    }
+    
     public void takeOrder(String product, Integer qtt) {
-        this.orders.add(new Product(product, qtt));
+        this.orders.add(new Product(product, qtt, productsRepo.getPriceByProduct(product)));
     }
 
     public void printReceipt() {
@@ -17,8 +23,7 @@ public class CoffeeShop {
         
         int totalFreeExpresso = 0;
         
-        int totalLates = (int) this.orders.stream().filter(p -> p.getName().equals("Latte")).map(p -> {
-        	System.out.println(p.getQtt());
+        int totalLates = (int) this.orders.stream().filter(p -> p.getName().equals("Latte")).map(p -> {        	
         	return p.getQtt();
         }).reduce(0, (a,b) -> a + b);
         
@@ -49,5 +54,10 @@ public class CoffeeShop {
 
     public void printMenu() {
         // Print whole menu
+    	System.out.println("| Product Name | Price |");
+    	System.out.println("| :---: | :---: |");
+    	productsRepo.getProducts().forEach((name, price) -> {
+    		System.out.println("| " + name + " | " + price + " |");
+    	});
     }
 }

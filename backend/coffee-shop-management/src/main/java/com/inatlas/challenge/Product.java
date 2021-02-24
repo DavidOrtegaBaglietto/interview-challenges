@@ -4,10 +4,12 @@ public class Product {
     private String name;
     private Integer qtt;
     private boolean discount;
+    private String price;
 
-    public Product(String name, Integer qtt) {
+    public Product(String name, Integer qtt, String price) {
         this.name = name;
         this.qtt = qtt;
+        this.price = price;
     }
 
     @Override
@@ -27,17 +29,8 @@ public class Product {
         if (discount) {
             return "$ 0.0";
         }
-
-        if ("Sandwich".equals(this.name)) {
-            return "$ 10.10";
-        }
-        if ("Latte".equals(this.name)) {
-            return "$ 5.3";
-        }
-        if ("Espresso".equals(this.name)) {
-            return "$ 4";
-        }
-        return "";
+        
+        return price;
     }
 
     public void setDiscount(boolean discount) {

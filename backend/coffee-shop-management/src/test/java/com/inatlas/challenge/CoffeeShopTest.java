@@ -6,7 +6,7 @@ public class CoffeeShopTest {
     
     @Test
     public void testTakeMyFirstOrder(){
-        CoffeeShop coffeeShop = new CoffeeShop();
+        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl());
         coffeeShop.printMenu();
         coffeeShop.takeOrder("Latte", 1);
         coffeeShop.takeOrder("Espresso", 1);
@@ -17,7 +17,7 @@ public class CoffeeShopTest {
 
     @Test
     public void testTakeMySecondOrder(){
-        CoffeeShop coffeeShop = new CoffeeShop();
+        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl());
         coffeeShop.printMenu();
         coffeeShop.takeOrder("Latte", 2);
         coffeeShop.takeOrder("Espresso", 1);
@@ -28,7 +28,7 @@ public class CoffeeShopTest {
 
     @Test
     public void testTakeMyThirdOrder3(){
-        CoffeeShop coffeeShop = new CoffeeShop();
+        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl());
         coffeeShop.printMenu();
         coffeeShop.takeOrder("Latte", 1);
         coffeeShop.takeOrder("Latte", 1);
@@ -40,7 +40,7 @@ public class CoffeeShopTest {
 
     @Test
     public void testTakeMyFourthOrder(){
-        CoffeeShop coffeeShop = new CoffeeShop();
+        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl());
         coffeeShop.printMenu();
         coffeeShop.takeOrder("Latte", 2);
         coffeeShop.takeOrder("Espresso", 1);
