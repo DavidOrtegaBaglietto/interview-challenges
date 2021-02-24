@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class ProductsRepoImpl implements ProductsRepo{
 	
+	@SuppressWarnings("serial")
 	private final Map<String, String> products = new HashMap<String, String> ()
 			{{
 				put("Sandwich", "$ 10.10");

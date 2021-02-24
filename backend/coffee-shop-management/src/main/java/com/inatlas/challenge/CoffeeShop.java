@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoffeeShop {
-	private final int DISCOUNT_WHEN_BUY_X_LATTES= 2;
+	
     private List<Product> orders = new ArrayList<>();
 
-    private ProductsRepo productsRepo;
+    private ProductsRepo productsRepo;    
     
-    public CoffeeShop(ProductsRepo productsRepo)
-    {
+    public CoffeeShop(ProductsRepo productsRepo) {
     	this.productsRepo = productsRepo;
     }
     
@@ -18,38 +17,8 @@ public class CoffeeShop {
         this.orders.add(new Product(product, qtt, productsRepo.getPriceByProduct(product)));
     }
 
-    public void printReceipt() {
-        System.out.println("======================================");
-        
-        int totalFreeExpresso = 0;
-        
-        int totalLates = (int) this.orders.stream().filter(p -> p.getName().equals("Latte")).map(p -> {        	
-        	return p.getQtt();
-        }).reduce(0, (a,b) -> a + b);
-        
-        
-        if (totalLates > 1) totalFreeExpresso = totalLates / DISCOUNT_WHEN_BUY_X_LATTES;
-               
-        for (Product p : this.orders)
-        {
-          	if (totalFreeExpresso == 0) break;
-          	else
-          	{
-	            if (p.getName().equals("Espresso")) {
-	                p.setDiscount(true);
-	                totalFreeExpresso--;
-	            }
-          	}
-        }
-      
-        
-        Double total = this.orders.stream().map(p -> {
-            System.out.println(p);
-            return Double.valueOf(p.getPrice().split("\\$")[1]);
-        }).reduce(0.0, (a, b) -> a + b);
-        System.out.println("----------------");
-        System.out.println("Total: $" + total);
-        System.out.println("======================================");
+    public void printReceipt() {    	    
+    	getCheapestReceipt().printReceipt();
     }
 
     public void printMenu() {
@@ -59,5 +28,30 @@ public class CoffeeShop {
     	productsRepo.getProducts().forEach((name, price) -> {
     		System.out.println("| " + name + " | " + price + " |");
     	});
+    }
+    
+    private Receipt getCheapestReceipt() {
+    	GenerateReceipt generateReceiptWithPromotionFreeEspresso = new GenerateReceiptWithPromotionFreeEspresso(cloneProductsList(orders));
+    	GenerateReceipt generateReceiptWithDiscountFivePercent = new GenerateReceiptWithDiscountXPercent(cloneProductsList(orders), 0.05, 8);
+    	
+    	generateReceiptWithPromotionFreeEspresso.generateReceipt();
+    	generateReceiptWithDiscountFivePercent.generateReceipt();
+    
+    	if (generateReceiptWithPromotionFreeEspresso.getReceipt().getTotalPrice() > generateReceiptWithDiscountFivePercent.getReceipt().getTotalPrice()) 
+    		return generateReceiptWithDiscountFivePercent.getReceipt();
+    	else 
+    		return generateReceiptWithPromotionFreeEspresso.getReceipt();
+    }
+    
+    public List<Product> cloneProductsList(List<Product> list) {
+        List<Product> clone = new ArrayList<Product>(list.size());
+        for (Product item : list)
+			try {
+				clone.add((Product) item.clone());
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        return clone;
     }
 }

@@ -1,6 +1,6 @@
 package com.inatlas.challenge;
 
-public class Product {
+public class Product implements Cloneable{
     private String name;
     private Integer qtt;
     private boolean discount;
@@ -36,4 +36,12 @@ public class Product {
     public void setDiscount(boolean discount) {
         this.discount = discount;
     }
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException  {
+		Product clone = null; 
+        clone = (Product) super.clone();       
+        return clone;
+	}
+    
 }
