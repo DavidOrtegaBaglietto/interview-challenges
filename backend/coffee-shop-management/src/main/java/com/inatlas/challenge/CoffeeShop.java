@@ -2,8 +2,10 @@ package com.inatlas.challenge;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CoffeeShop {
+	private final int DISCOUNT_WHEN_BUY_X_LATTES= 2;
     private List<Product> orders = new ArrayList<>();
 
     public void takeOrder(String product, Integer qtt) {
@@ -12,14 +14,30 @@ public class CoffeeShop {
 
     public void printReceipt() {
         System.out.println("======================================");
-        boolean hasMoreThanOneLatte = this.orders.stream().anyMatch(p -> p.getName().equals("Latte") && p.getQtt() > 1);
-        if (hasMoreThanOneLatte) {
-            this.orders.forEach(p -> {
-                if (p.getName().equals("Espresso")) {
-                    p.setDiscount(true);
-                }
-            });
+        
+        int totalFreeExpresso = 0;
+        
+        int totalLates = (int) this.orders.stream().filter(p -> p.getName().equals("Latte")).map(p -> {
+        	System.out.println(p.getQtt());
+        	return p.getQtt();
+        }).reduce(0, (a,b) -> a + b);
+        
+        
+        if (totalLates > 1) totalFreeExpresso = totalLates / DISCOUNT_WHEN_BUY_X_LATTES;
+               
+        for (Product p : this.orders)
+        {
+          	if (totalFreeExpresso == 0) break;
+          	else
+          	{
+	            if (p.getName().equals("Espresso")) {
+	                p.setDiscount(true);
+	                totalFreeExpresso--;
+	            }
+          	}
         }
+      
+        
         Double total = this.orders.stream().map(p -> {
             System.out.println(p);
             return Double.valueOf(p.getPrice().split("\\$")[1]);
