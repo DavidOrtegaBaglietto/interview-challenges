@@ -40,7 +40,7 @@ public class CoffeeShop {
         
         Double total = this.orders.stream().map(p -> {
             System.out.println(p);
-            return Double.valueOf(p.getPrice().split("\\$")[1]);
+            return Double.valueOf(p.getPrice().split("\\$")[1]) * p.getQtt();
         }).reduce(0.0, (a, b) -> a + b);
         System.out.println("----------------");
         System.out.println("Total: $" + total);
