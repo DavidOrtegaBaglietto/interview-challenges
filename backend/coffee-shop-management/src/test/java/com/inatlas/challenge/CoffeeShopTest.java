@@ -10,10 +10,17 @@ public class CoffeeShopTest {
     public void testTakeMyFirstOrder(){
         CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
-        coffeeShop.takeOrder("Latte", 1);
-        coffeeShop.takeOrder("Espresso", 1);
-        coffeeShop.takeOrder("Sandwich", 1);
-        coffeeShop.printReceipt();
+        coffeeShop.addClient(1);
+        coffeeShop.takeOrder(1, "Latte", 1);
+        coffeeShop.takeOrder(1, "Espresso", 1);
+        coffeeShop.takeOrder(1, "Sandwich", 1);
+        coffeeShop.printReceipt(1);
+        
+        coffeeShop.addClient(2);
+        coffeeShop.takeOrder(2, "Latte", 2);
+        coffeeShop.takeOrder(2, "Espresso", 1);
+        coffeeShop.takeOrder(2, "Sandwich", 1);
+        coffeeShop.printReceipt(2);
         // Total should be $18.1
     }
 
@@ -21,10 +28,11 @@ public class CoffeeShopTest {
     public void testTakeMySecondOrder(){
         CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
-        coffeeShop.takeOrder("Latte", 2);
-        coffeeShop.takeOrder("Espresso", 1);
-        coffeeShop.takeOrder("Sandwich", 1);
-        coffeeShop.printReceipt();
+        coffeeShop.addClient(1);
+        coffeeShop.takeOrder(1, "Latte", 2);
+        coffeeShop.takeOrder(1, "Espresso", 1);
+        coffeeShop.takeOrder(1, "Sandwich", 1);
+        coffeeShop.printReceipt(1);
         // Total should be $15.1
     }
 
@@ -32,11 +40,12 @@ public class CoffeeShopTest {
     public void testTakeMyThirdOrder3(){
         CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
-        coffeeShop.takeOrder("Latte", 1);
-        coffeeShop.takeOrder("Latte", 1);
-        coffeeShop.takeOrder("Espresso", 1);
-        coffeeShop.takeOrder("Sandwich", 1);
-        coffeeShop.printReceipt();
+        coffeeShop.addClient(1);
+        coffeeShop.takeOrder(1, "Latte", 1);
+        coffeeShop.takeOrder(1, "Latte", 1);
+        coffeeShop.takeOrder(1, "Espresso", 1);
+        coffeeShop.takeOrder(1, "Sandwich", 1);
+        coffeeShop.printReceipt(1);
         // Total should be $15.1
     }
 
@@ -44,11 +53,12 @@ public class CoffeeShopTest {
     public void testTakeMyFourthOrder(){
         CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
-        coffeeShop.takeOrder("Latte", 2);
-        coffeeShop.takeOrder("Espresso", 1);
-        coffeeShop.takeOrder("Espresso", 1);
-        coffeeShop.takeOrder("Sandwich", 1);
-        coffeeShop.printReceipt();
+        coffeeShop.addClient(1);
+        coffeeShop.takeOrder(1, "Latte", 2);
+        coffeeShop.takeOrder(1, "Espresso", 1);
+        coffeeShop.takeOrder(1, "Espresso", 1);
+        coffeeShop.takeOrder(1, "Sandwich", 1);
+        coffeeShop.printReceipt(1);
         // Total should be $18.1
     }
     
@@ -56,11 +66,12 @@ public class CoffeeShopTest {
     public void testTakeMyFifthOrder(){
         CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
-        coffeeShop.takeOrder("Latte", 1);
-        coffeeShop.takeOrder("Espresso", 1);
-        coffeeShop.takeOrder("Espresso", 1);
-        coffeeShop.takeOrder("Sandwich", 5);
-        coffeeShop.printReceipt();
+        coffeeShop.addClient(1);
+        coffeeShop.takeOrder(1, "Latte", 1);
+        coffeeShop.takeOrder(1, "Espresso", 1);
+        coffeeShop.takeOrder(1, "Espresso", 1);
+        coffeeShop.takeOrder(1, "Sandwich", 5);
+        coffeeShop.printReceipt(1);
     }
     
 
@@ -68,32 +79,35 @@ public class CoffeeShopTest {
     public void testTakeMySixthOrder(){
         CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
-        coffeeShop.takeOrder("Latte", 10);
-        coffeeShop.takeOrder("Espresso", 1);
-        coffeeShop.takeOrder("Espresso", 1);
-        coffeeShop.takeOrder("Sandwich", 5);
-        coffeeShop.printReceipt();
+        coffeeShop.addClient(1);
+        coffeeShop.takeOrder(1, "Latte", 10);
+        coffeeShop.takeOrder(1, "Espresso", 1);
+        coffeeShop.takeOrder(1, "Espresso", 1);
+        coffeeShop.takeOrder(1, "Sandwich", 5);
+        coffeeShop.printReceipt(1);
     }
     
     @Test
     public void testTakeMySeventhOrder(){
         CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
-        coffeeShop.takeOrder("Latte", 1);
-        coffeeShop.takeOrder("Espresso", 1);
-        coffeeShop.takeOrder("Espresso", 1);
-        coffeeShop.takeOrder("Sandwich", 6);
-        coffeeShop.printReceipt();
+        coffeeShop.addClient(1);
+        coffeeShop.takeOrder(1, "Latte", 1);
+        coffeeShop.takeOrder(1, "Espresso", 1);
+        coffeeShop.takeOrder(1, "Espresso", 1);
+        coffeeShop.takeOrder(1, "Sandwich", 6);
+        coffeeShop.printReceipt(1);
     }
     
     @Test
     public void testTakeMyEighthOrder(){
         CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
-        coffeeShop.takeOrder("Latte", 2);
-        coffeeShop.takeOrder("Espresso", 1);
-        coffeeShop.takeOrder("Sandwich", 4);
+        coffeeShop.addClient(1);
+        coffeeShop.takeOrder(1, "Latte", 2);
+        coffeeShop.takeOrder(1, "Espresso", 1);
+        coffeeShop.takeOrder(1, "Sandwich", 4);
 
-        coffeeShop.printReceipt();
+        coffeeShop.printReceipt(1);
     }
 }

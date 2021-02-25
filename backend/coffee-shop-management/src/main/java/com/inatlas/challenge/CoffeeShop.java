@@ -1,14 +1,15 @@
 package com.inatlas.challenge;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.inatlas.challenge.client.Client;
 import com.inatlas.challenge.receipt.CalculateReceipt;
 import com.inatlas.challenge.receipt.Receipt;
 
 public class CoffeeShop {
-	
-    private List<Product> orders = new ArrayList<>();
+	    
+    private Map<Integer, Client> clients = new HashMap<Integer, Client>();
 
     private ProductsRepo productsRepo;    
     private CalculateReceipt calculateReceipt;
@@ -18,12 +19,20 @@ public class CoffeeShop {
     	this.calculateReceipt = calculateReceipt;
     }
     
-    public void takeOrder(String product, Integer qtt) {
-        this.orders.add(new Product(product, qtt, productsRepo.getPriceByProduct(product)));
+    public void addClient(Integer clientId)
+    {
+    	clients.put(clientId, new Client(clientId));
+    }
+    
+    public void takeOrder(Integer clientId, String product, Integer qtt) {
+        clients.get(clientId).addProductToOrder(new Product(product, qtt, productsRepo.getPriceByProduct(product)));
     }
 
-    public void printReceipt() {  
-    	calculateReceipt().printReceipt();
+    public void printReceipt(Integer clientId) {  
+    	Receipt receipt = calculateReceipt(clientId);
+    	
+    	receipt.printReceipt();
+    	
     }
 
     public void printMenu() {
@@ -35,9 +44,9 @@ public class CoffeeShop {
     	});
     }
     
-    private Receipt calculateReceipt()
+    private Receipt calculateReceipt(Integer clienteId)
     {
-    	calculateReceipt.setOrders(orders);
+    	calculateReceipt.setOrders(clients.get(clienteId).getOrder());
     	return calculateReceipt.calculate();
     }
    
