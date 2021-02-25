@@ -3,7 +3,7 @@ package com.inatlas.challenge.receipt;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.inatlas.challenge.Product;
+import com.inatlas.challenge.products.Product;
 
 public class GenerateReceiptWithPromotionFreeEspresso implements GenerateReceipt {
 

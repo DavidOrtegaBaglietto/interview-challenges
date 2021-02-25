@@ -2,7 +2,7 @@ package com.inatlas.challenge.receipt;
 
 import java.util.List;
 
-import com.inatlas.challenge.Product;
+import com.inatlas.challenge.products.Product;
 
 public abstract class CalculateReceiptGeneric implements CalculateReceipt{
 

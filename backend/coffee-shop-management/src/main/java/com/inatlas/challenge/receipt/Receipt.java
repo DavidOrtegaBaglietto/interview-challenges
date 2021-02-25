@@ -34,11 +34,8 @@ public class Receipt {
 	}
 	
 	public Double getTotalPrice() {				
-		if (discountToApplyToTotalPrice > 0 				
-				&& productsRequiredToApplyDiscount < totalProducts) 
-			return totalPrice - (totalPrice * discountToApplyToTotalPrice);
-		else
-			return totalPrice;
+
+			return totalPrice - getDiscount();
 	}
 		
 	public void printReceipt() {
@@ -52,6 +49,14 @@ public class Receipt {
         System.out.println("Total: $" + getTotalPrice());
         System.out.println("======================================");
     }
+	
+	private double getDiscount() {
+		if (discountToApplyToTotalPrice > 0 				
+				&& productsRequiredToApplyDiscount < totalProducts) 
+			return totalPrice * discountToApplyToTotalPrice;
+		else
+			return 0.0;
+	}
 	
 	
 	

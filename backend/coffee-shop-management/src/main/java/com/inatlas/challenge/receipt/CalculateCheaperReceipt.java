@@ -3,7 +3,7 @@ package com.inatlas.challenge.receipt;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.inatlas.challenge.Product;
+import com.inatlas.challenge.products.Product;
 
 public class CalculateCheaperReceipt extends CalculateReceiptGeneric {
 	
@@ -11,8 +11,7 @@ public class CalculateCheaperReceipt extends CalculateReceiptGeneric {
 	
 
 	@Override
-	public Receipt calculate()
-	{
+	public Receipt calculate() {
 		GenerateReceipt generateReceiptWithPromotionFreeEspresso = new GenerateReceiptWithPromotionFreeEspresso(cloneProductsList(orders));
     	GenerateReceipt generateReceiptWithDiscountXPercent = new GenerateReceiptWithDiscountXPercent(cloneProductsList(orders), 0.05, 8);
     	    	
@@ -22,8 +21,7 @@ public class CalculateCheaperReceipt extends CalculateReceiptGeneric {
     	    	
 	}
 	
-	private Receipt compareAndGetTheCheapestReceipt(Receipt receiptWithPromotionFreeEspresso, Receipt receiptWithDiscountXPercent)
-	{
+	private Receipt compareAndGetTheCheapestReceipt(Receipt receiptWithPromotionFreeEspresso, Receipt receiptWithDiscountXPercent) {
 		if (receiptWithPromotionFreeEspresso.getTotalPrice() > receiptWithDiscountXPercent.getTotalPrice()) {	    		
     		if (receiptWithDiscountXPercent.getTotalPrice() < PROMOTION_WHEN_ORDER_VALUE_OVER) return receiptWithDiscountXPercent;
     		else {

@@ -3,7 +3,7 @@ package com.inatlas.challenge.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.inatlas.challenge.Product;
+import com.inatlas.challenge.products.Product;
 
 public class Client {
 	
@@ -15,8 +15,7 @@ public class Client {
 		this.order = new ArrayList<Product>(); 
 	}
 	
-	public void addProductToOrder(Product product)
-	{
+	public void addProductToOrder(Product product) {
 		this.order.add(product);
 	}
 

@@ -1,4 +1,4 @@
-package com.inatlas.challenge;
+package com.inatlas.challenge.products;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,14 +17,18 @@ public class ProductsRepoInMemory implements ProductsRepo{
 	}};
 
 	@Override
-	public Map<String, String> getProducts() { 
+	public Map<String, String> findAllProducts() { 
 		return products;
 	}
 
 	@Override
-	public String getPriceByProduct(String product) {
+	public String findPriceByProductName(String product) {
 		
 		return products.get(product);
 	}
 
+	@Override
+	public Boolean exist(String product) {
+		return products.containsKey(product);
+	}
 }

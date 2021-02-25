@@ -1,4 +1,4 @@
-package com.inatlas.challenge;
+package com.inatlas.challenge.products;
 
 public class Product implements Cloneable{
     private String name;
@@ -10,11 +10,6 @@ public class Product implements Cloneable{
         this.name = name;
         this.qtt = qtt;
         this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return name + " " + getPrice();
     }
 
     public Integer getQtt() {

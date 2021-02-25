@@ -2,7 +2,7 @@ package com.inatlas.challenge.receipt;
 
 import java.util.List;
 
-import com.inatlas.challenge.Product;
+import com.inatlas.challenge.products.Product;
 
 public class GenerateReceiptWithDiscountXPercentAndLatteDiscount extends GenerateReceiptWithDiscountXPercent {
 	
@@ -21,7 +21,5 @@ public class GenerateReceiptWithDiscountXPercentAndLatteDiscount extends Generat
 			receipt.addProduct(p.getName(), price, p.getQtt());
 		});
 		return receipt;
-	}
-	
-
+	}	
 }
