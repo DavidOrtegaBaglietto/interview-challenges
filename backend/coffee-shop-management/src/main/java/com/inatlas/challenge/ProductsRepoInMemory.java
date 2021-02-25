@@ -3,7 +3,7 @@ package com.inatlas.challenge;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductsRepoImpl implements ProductsRepo{
+public class ProductsRepoInMemory implements ProductsRepo{
 	
 	@SuppressWarnings("serial")
 	private final Map<String, String> products = new HashMap<String, String> () {{

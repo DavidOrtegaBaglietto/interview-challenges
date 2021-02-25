@@ -2,13 +2,14 @@ package com.inatlas.challenge;
 
 import org.junit.Test;
 
+import com.inatlas.challenge.client.ClientsRepoInMemory;
 import com.inatlas.challenge.receipt.CalculateCheaperReceipt;
 
 public class CoffeeShopTest {
     
     @Test
     public void testTakeMyFirstOrder(){
-        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
+        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoInMemory(), new ClientsRepoInMemory(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
         coffeeShop.addClient(1);
         coffeeShop.takeOrder(1, "Latte", 1);
@@ -26,7 +27,7 @@ public class CoffeeShopTest {
 
     @Test
     public void testTakeMySecondOrder(){
-        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
+        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoInMemory(), new ClientsRepoInMemory(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
         coffeeShop.addClient(1);
         coffeeShop.takeOrder(1, "Latte", 2);
@@ -38,7 +39,7 @@ public class CoffeeShopTest {
 
     @Test
     public void testTakeMyThirdOrder3(){
-        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
+        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoInMemory(), new ClientsRepoInMemory(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
         coffeeShop.addClient(1);
         coffeeShop.takeOrder(1, "Latte", 1);
@@ -51,7 +52,7 @@ public class CoffeeShopTest {
 
     @Test
     public void testTakeMyFourthOrder(){
-        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
+        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoInMemory(), new ClientsRepoInMemory(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
         coffeeShop.addClient(1);
         coffeeShop.takeOrder(1, "Latte", 2);
@@ -64,7 +65,7 @@ public class CoffeeShopTest {
     
     @Test
     public void testTakeMyFifthOrder(){
-        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
+        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoInMemory(), new ClientsRepoInMemory(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
         coffeeShop.addClient(1);
         coffeeShop.takeOrder(1, "Latte", 1);
@@ -77,7 +78,7 @@ public class CoffeeShopTest {
 
     @Test
     public void testTakeMySixthOrder(){
-        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
+        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoInMemory(), new ClientsRepoInMemory(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
         coffeeShop.addClient(1);
         coffeeShop.takeOrder(1, "Latte", 10);
@@ -89,7 +90,7 @@ public class CoffeeShopTest {
     
     @Test
     public void testTakeMySeventhOrder(){
-        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
+        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoInMemory(), new ClientsRepoInMemory(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
         coffeeShop.addClient(1);
         coffeeShop.takeOrder(1, "Latte", 1);
@@ -101,7 +102,7 @@ public class CoffeeShopTest {
     
     @Test
     public void testTakeMyEighthOrder(){
-        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoImpl(), new CalculateCheaperReceipt());
+        CoffeeShop coffeeShop = new CoffeeShop(new ProductsRepoInMemory(), new ClientsRepoInMemory(), new CalculateCheaperReceipt());
         coffeeShop.printMenu();
         coffeeShop.addClient(1);
         coffeeShop.takeOrder(1, "Latte", 2);

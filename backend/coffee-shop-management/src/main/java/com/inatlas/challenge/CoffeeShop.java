@@ -1,38 +1,36 @@
 package com.inatlas.challenge;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.inatlas.challenge.client.Client;
+import com.inatlas.challenge.client.ClientsRepo;
 import com.inatlas.challenge.receipt.CalculateReceipt;
 import com.inatlas.challenge.receipt.Receipt;
 
 public class CoffeeShop {
-	    
-    private Map<Integer, Client> clients = new HashMap<Integer, Client>();
-
+	        
     private ProductsRepo productsRepo;    
+    private ClientsRepo clientsRepo;    
     private CalculateReceipt calculateReceipt;
     
-    public CoffeeShop(ProductsRepo productsRepo, CalculateReceipt calculateReceipt) {
+    public CoffeeShop(ProductsRepo productsRepo, ClientsRepo clientsRepo, CalculateReceipt calculateReceipt) {
     	this.productsRepo = productsRepo;
+    	this.clientsRepo = clientsRepo;
     	this.calculateReceipt = calculateReceipt;
     }
     
     public void addClient(Integer clientId)
     {
-    	clients.put(clientId, new Client(clientId));
+    	Client client = new Client(clientId);
+    	clientsRepo.addClient(client);
     }
     
     public void takeOrder(Integer clientId, String product, Integer qtt) {
-        clients.get(clientId).addProductToOrder(new Product(product, qtt, productsRepo.getPriceByProduct(product)));
+    	clientsRepo.findClientById(clientId).addProductToOrder(new Product(product, qtt, productsRepo.getPriceByProduct(product)));
     }
 
     public void printReceipt(Integer clientId) {  
     	Receipt receipt = calculateReceipt(clientId);
     	
-    	receipt.printReceipt();
-    	
+    	receipt.printReceipt();    	
     }
 
     public void printMenu() {
@@ -43,11 +41,13 @@ public class CoffeeShop {
     		System.out.println("| " + name + " | " + price + " |");
     	});
     }
-    
+
     private Receipt calculateReceipt(Integer clienteId)
     {
-    	calculateReceipt.setOrders(clients.get(clienteId).getOrder());
+    	calculateReceipt.setOrders(clientsRepo.findClientById(clienteId).getOrder());
     	return calculateReceipt.calculate();
     }
+    
+
    
 }
